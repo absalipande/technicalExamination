@@ -46,7 +46,7 @@ const HomePage = () => {
       <p className='mt-2'>Here are the list of territories:</p>
       <div className='mt-2'>
         {territories
-          .filter((territory) => !territory.parent_id)
+          .filter((territory) => !territory.parent)
           .map((territory) => (
             <TerritoryComponent
               key={territory.id}

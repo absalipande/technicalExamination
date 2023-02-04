@@ -9,7 +9,7 @@ const TerritoryComponent = ({ territory, onClick, open }) => {
       >
         {open ? '▼' : '►'} {territory.name}
       </div>
-      {open && (
+      {open && Array.isArray(territory.children) && (
         <div className='ml-4'>
           {territory.children.map((child) => (
             <TerritoryComponent
