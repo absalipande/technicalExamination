@@ -1,28 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const TerritoryComponent = ({ territory, onClick, open }) => {
   return (
-    <div className='flex flex-col'>
+    <div className='mt-4'>
       <div
-        className='text-lg cursor-pointer'
+        className='cursor-pointer flex items-center'
         onClick={() => onClick(territory.id)}
       >
-        {open ? '▼' : '►'} {territory.name}
+        <span className={`${open ? '-rotate-90' : ''} mr-2`}>
+          {open ? '▼' : '►'}
+        </span>
+        <span>{territory.name}</span>
       </div>
-      {open && Array.isArray(territory.children) && (
-        <div className='ml-4'>
-          {territory.children.map((child) => (
-            <TerritoryComponent
-              key={child.id}
-              territory={child}
-              onClick={onClick}
-              open={false}
-            />
+      {open && territory.children && (
+        <ul className='ml-4'>
+          {territory.children.map((child, index) => (
+            <li key={child.id + index}>
+              <TerritoryComponent
+                territory={child}
+                onClick={onClick}
+                open={false}
+              />
+            </li>
           ))}
-        </div>
+        </ul>
       )}
     </div>
   );
 };
-
 export default TerritoryComponent;
