@@ -1,9 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-function App() {
- 
-}
+import LoginPage from './pages/LoginPage';
+import AuthComponent from './AuthComponent';
 
-export default App
+const App = () => {
+  <BrowserRouter>
+    <Routes>
+      <Route path='/Account/SignIn' element={<LoginPage />} />
+    </Routes>
+    ;
+  </BrowserRouter>;
+};
+
+export default App;
