@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 
 const TerritoryComponent = ({ territory, onClick, open }) => {
   return (
-    <div className='mt-4'>
+    <div className='mb-4'>
       <div
-        className='cursor-pointer flex items-center'
+        className='cursor-pointer flex items-center text-gray-800 hover:text-gray-600'
         onClick={() => onClick(territory.id)}
       >
-        <span className={`${open ? '-rotate-90' : ''} mr-2`}>
-          {open ? '▼' : '►'}
+        <i className={`fas fa-chevron-${open ? 'down' : 'right'} mr-2`}></i>
+        <span className='font-medium'>
+          {territory.name ? territory.name : 'No Name'}
         </span>
-        <span>{territory.name}</span>
       </div>
       {open && territory.children && (
         <ul className='ml-4'>
@@ -19,7 +19,7 @@ const TerritoryComponent = ({ territory, onClick, open }) => {
               <TerritoryComponent
                 territory={child}
                 onClick={onClick}
-                open={false}
+                open={open.includes(child.id)}
               />
             </li>
           ))}
@@ -28,4 +28,5 @@ const TerritoryComponent = ({ territory, onClick, open }) => {
     </div>
   );
 };
+
 export default TerritoryComponent;
