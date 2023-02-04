@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
-import DisplayAllTerritories from '../components/DisplayAllTerritories';
+import axios from 'axios';
+import TerritoryCard from '../components/TerritoryCard';
 
 export const AllTerritoriesContext = createContext();
 
@@ -7,22 +8,26 @@ const HomePage = () => {
   const [territories, setTerritories] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchTerritories = async () => {
       try {
-        const response = await fetch('http://localhost:3060/Territories/All');
-        const result = await response.json();
-        setTerritories(result.data);
-      } catch (err) {
-        console.log(err);
+        const response = await axios.get(
+          'https://netzwelt-devtest.azurewebsites.net/Territories/All'
+        );
+        setTerritories(response.data);
+      } catch (error) {
+        console.log(error);
       }
     };
-    fetchData();
+    fetchTerritories();
   }, []);
+
   return (
     <div>
-      <AllTerritoriesContext>
-        <DisplayAllTerritories />
-      </AllTerritoriesContext>
+      <AllTerritoriesContext.Provider value={territories}>
+        {territories.map(territory => (
+          <TerritoryCard key={territory.id} territory={territory} />
+        ))}
+      </AllTerritoriesContext.Provider>
     </div>
   );
 };
