@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import LogoutButtonComponent from '../components/LogoutButtonComponent';
 
 const HomePage = () => {
   const [territories, setTerritories] = useState([]);
@@ -54,7 +55,7 @@ const HomePage = () => {
     return (
       <div key={territory.id}>
         <div
-          className='cursor-pointer flex items-center p-2 border-b border-gray-300 hover:bg-gray-100'
+          className='cursor-pointer flex items-center p-2 hover:bg-gray-100'
           onClick={() => handleTerritoryClick(territory.id)}
         >
           <i
@@ -62,7 +63,7 @@ const HomePage = () => {
               openTerritories.includes(territory.id) ? 'down' : 'right'
             } mr-2`}
           ></i>
-          <span className='font-medium'>
+          <span className='font-xl'>
             {territory.name ? territory.name : 'No Name'}
           </span>
         </div>
@@ -84,8 +85,10 @@ const HomePage = () => {
       <div className='w-64 p-4 bg-white rounded shadow'>
         <h2 className='text-2xl mb-4 text-center'>Territories</h2>
         {territories.map((territory) => renderTerritory(territory))}
+        <LogoutButtonComponent />
       </div>
     </div>
   );
 };
+
 export default HomePage;
