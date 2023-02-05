@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import TerritoryComponent from '../components/TerritoryComponent';
 
 const HomePage = () => {
   const [territories, setTerritories] = useState([]);
